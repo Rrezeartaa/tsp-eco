@@ -21,10 +21,10 @@ def loadTSP(path):
 				if 'EOF' in line or 'DISPLAY_DATA_SECTION' in line:
 					data = False
 				elif EUC_2D:
-					# Read Coordinate
+
 					city_coord.append(line.split(' ')[1:3])
 				elif EXPLICIT:
-					# Parse Distance Matrix
+
 					for el in line.split(' '):
 						if el == '':
 							continue
@@ -170,7 +170,7 @@ def localOptimize(init_solution,dm,n_strategy,maxiter):
 		cost = cost_new
 	return s, cost, init_cost, t
 
-def localSearch(n,dm,init_strategy,n_strategy,maxiter,start_l=None):
+def funksioni(n,dm,init_strategy,n_strategy,maxiter,start_l=None):
         
 	s = initSolution(n,init_strategy,dm,start_l)
 	
@@ -208,7 +208,7 @@ def main(argv):
 		np.random.seed(run)
 		start_t = time.process_time()
 
-		s,cost,init_cost,t = localSearch(n, dm,
+		s,cost,init_cost,t = funksioni(n, dm,
 						args.init_strategy,
 						args.strategy,
 						args.maxiter,
@@ -236,7 +236,7 @@ def main(argv):
 		print("Solution with costs ",cost," found in ", diff_t, "s after ", t, " iterations.")
 		print("(Initial solution costs: ", init_cost, ")")
 
-	print("Statistics of multistart local search:")
+	print("Statistics of multistart:")
 	print(best_cost, " ... costs of best solution")
 	print(best_time, " ... time of best solution")
 	print(best_t, " ... iterations till convergence for best solution")

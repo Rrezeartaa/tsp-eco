@@ -4,7 +4,7 @@ import time
 import random
 import numpy as np
 from ls_2opt import loadTSP
-from ls_2opt import localSearch
+from ls_2opt import funksioni
 from ls_2opt import localOptimize
 
 def initPopulation(popsize, n, dm, maxiter):
@@ -18,7 +18,7 @@ def initPopulation(popsize, n, dm, maxiter):
 	for i in range(1,popsize+1):
 		np.random.seed(i)
 
-		s,cost,init_cost,t = localSearch(n, dm,
+		s,cost,init_cost,t = funksioni(n, dm,
 						init_strategy='greedy',
 						n_strategy='best_improve',
 						maxiter=maxiter,
@@ -26,7 +26,7 @@ def initPopulation(popsize, n, dm, maxiter):
 		solutions.append(s)
 		fitness.append(cost)
 		if t == maxiter:
-			print("Warning: maxiter reached in initializations local search.")
+			print("Warning: maxiter reached in initializations.")
 	# Kthimi i popullates si nje tuple i fitnesit dhe zgjidhjeve
 	return (np.array(solutions), np.array(fitness))
 
@@ -38,7 +38,7 @@ def selectParents(population, strategy='tournament', k=2):
 		for parent in [1, 2]:
 			pool = random.sample(I,k)
 			
-			rel_winner_i = np.argmin(population[1][pool]) # O(k)
+			rel_winner_i = np.argmin(population[1][pool])
 			winner_i = pool[rel_winner_i]
 			parents.append(population[0][winner_i])
 			# Largimi i fituesit qe mos me zgjedh perseri
